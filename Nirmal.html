@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="styles.css">
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="script.js"></script>
+    <title>Firebase Realtime Database Web</title>
+  <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+	var config = {
+    apiKey: "AIzaSyD7pT1tLsQPTaMQ5Aatql44jG7qu4H16SU",
+    authDomain: "fir-realtime-db-web-5736d.firebaseapp.com",
+    databaseURL: "https://fir-realtime-db-web-5736d.firebaseio.com",
+    projectId: "fir-realtime-db-web-5736d",
+    storageBucket: "fir-realtime-db-web-5736d.appspot.com",
+    messagingSenderId: "257479591520"
+				  };
+	firebase.initializeApp(config);
+   </script>
+   <style>
+		table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  margin-top:100px;
+}
+table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+ 
+}
+
+table th, table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+table td img { text-align: center; }
+@media screen and (max-width: 600px) {
+
+table { border: 0; }
+
+table caption { font-size: 1.3em; }
+
+table thead { display: none; }
+
+table tr {
+  border-bottom: 3px solid #ddd;
+  display: block;
+  margin-bottom: .625em;
+}
+
+table td {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  font-size: .8em;
+  text-align: right;
+}
+
+table td:before {
+  content: attr(data-label);
+  float: left;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+}
+.container{
+		width: 10%;
+		height: 10%;
+		background-color: red;
+		border: 1px solid #00FF	00;
+		margin: 0.5%;
+		position: relative;
+	}
+	
+	.baby{
+		width: 50%;
+		height: 50%;
+		background-color: red;
+		position: absolute;
+	}
+	
+	.center{
+		margin: 0 auto;
+		left: 25%;
+	}
+	.right{
+		left: 50%;
+	}
+	.middle {
+		top: 25%;
+	}
+	
+	.bottom {
+		top: 50%;
+	}
+
+   </style>
+  </head>
+  <body>  
+<div id='cssmenu'>
+<ul>
+  <div id="css-script-menu" align="center" padding-top="1px">
+ <h1 color="#00FFFF" padding-top=4px>Nirmal List</h1>
+ 
+</div>
+</ul>
+</div>  
+
+ 
+	<table id="tb1_nirmal_list" border="0" style=float:left;>
+ 	
+		<tr>
+			<th bgcolor=red>Political Party</th>			
+		</tr>		
+	</table>
+	<table id="tb1_nirmal_list1" border="0" style=float:left;>
+		
+		<tr>
+			
+			<th bgcolor=red>Candidate Name</th>
+		</tr>		
+		
+		
+	</table>
+		</br></br>
+	<div align="center">
+	<div id="middle_left" class="container" align="center" style=float:left;margin-top:40px;margin-left:250px;>
+		<div>
+			 <a href="C://Users/Vamshi%20Krishna/Desktop/cssmenu/Sirpur.html" style=color:black;><h4>Next</h4></a>
+		</div>
+    </div>
+	 <div id="middle_right" class="container" style=float:right;margin-top:40px;>
+		<div>
+			 <a href="C://Users/Vamshi%20Krishna/Desktop/cssmenu/Adilabad.html" style=color:black;><h4>Back</h4></a>
+ 
+		</div>
+		
+    </div>	
+
+</div>
+		<script> 
+			var sirpurConst = document.getElementById('tb1_nirmal_list');
+			var sirpurConst1 = document.getElementById('tb1_nirmal_list1');
+			var databaseRef1 = firebase.database().ref('Adilabad/Nirmal/PoliticalParty/');
+			var databaseRef = firebase.database().ref('Adilabad/Nirmal/CandidateName/');
+			var rowIndex = 1; 
+			var rowIndex1 = 1; 
+			databaseRef1.once('value', function(snapshot) {
+			snapshot.forEach(function(childSnapshot) {
+			var childKey = childSnapshot.key;
+					var childData = childSnapshot.val();   
+					var row = sirpurConst.insertRow(rowIndex);
+					var cellName = row.insertCell(0);
+					cellName.appendChild(document.createTextNode(childData));
+					rowIndex = rowIndex + 1; 
+														});
+															databaseRef.once('value', function(snapshot) {
+			snapshot.forEach(function(childSnapshot) {
+					var childKey = childSnapshot.key;
+					var childData = childSnapshot.val();   
+					var row = sirpurConst1.insertRow(rowIndex1);
+					//var cId=row.insertCell(0);
+					var cellName = row.insertCell(0);
+					cellName.appendChild(document.createTextNode(childData));
+					rowIndex1 = rowIndex1 + 1; 
+														});
+							});
+							});  
+		  
+			function reload_page()
+			{
+				window.location.reload();
+			}
+		</script>
+  </body>   
+</html>
